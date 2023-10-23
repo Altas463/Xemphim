@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<div class="contact-section">
+    <h1>Liên hệ với chúng tôi</h1>
+    <p>Nếu bạn có bất kỳ câu hỏi hoặc phản hồi nào, vui lòng liên hệ với chúng tôi qua biểu mẫu dưới đây:</p>
+
+    <form action="/submit_contact" method="post">
+        <label for="name">Tên:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="message">Tin nhắn:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <input type="submit" value="Gửi">
+    </form>
+
+    <div class="contact-info">
+        <h2>Thông tin liên lạc của chúng tôi</h2>
+        <p>Email: info@yourwebsite.com</p>
+        <p>Số điện thoại: +84 123456789</p>
+    </div>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .contact-section {
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        transition: all 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type=text], input[type=email], textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+
+    input[type=submit] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease; /* Thêm hiệu ứng chuyển đổi */
+    }
+
+        input[type=submit]:hover {
+            background-color: #45a049; /* Thay đổi màu nền khi di chuột qua */
+        }
+
+    .contact-info {
+        margin-top: 20px; /* Thêm khoảng cách giữa biểu mẫu và thông tin liên lạc */
+    }
+</style>

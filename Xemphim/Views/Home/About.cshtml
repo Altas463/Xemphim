@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<div class="about-section">
+    <h1>Về Chúng Tôi</h1>
+    <p>Chúng tôi là một trang web xem phim đáng tin cậy, cung cấp cho bạn những bộ phim mới nhất và phổ biến nhất.</p>
+    <p>Chúng tôi cam kết đem đến cho bạn trải nghiệm xem phim tuyệt vời với giao diện đáng yêu và dễ sử dụng.</p>
+</div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+    }
+
+    .about-section {
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+    }
+
+    .row {
+        display: flex; /* Sắp xếp các cột theo hàng ngang */
+        justify-content: space-around; /* Căn giữa các cột */
+        flex-wrap: wrap; /* Cho phép các cột chuyển xuống dưới nếu không đủ không gian */
+        margin-top: 20px;
+    }
+
+    .column {
+        flex-basis: calc(50% - 20px);
+        flex-grow: 1; /* Cho phép các cột mở rộng để chiếm đủ không gian */
+        margin: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        background-color: #fff;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+</style>
+
+<h2 style="text-align:center">Đội Của Chúng Tôi</h2>
+
+<div class="row">
+    <div class="column">
+        <div class="container">
+            <img src="https://scontent.fsgn2-7.fna.fbcdn.net/v/t39.30808-1/294197539_766209024512654_3241615829727926858_n.jpg?stp=dst-jpg_p200x200&_nc_cat=100&ccb=1-7&_nc_sid=fe8171&_nc_ohc=5spFRLyJIw0AX-6GS4M&_nc_ht=scontent.fsgn2-7.fna&oh=00_AfA-pX4jaGPZNMw2kYbZbs8qHWi7vyUO5IhxZZOvRMn_8Q&oe=6526B162" alt="Long" />
+            <h2>Long</h2>
+            <p class="title">Unknow</p>
+            <p>Học Hành Siêng Năng.</p>
+            <p>hoanglong@gmail.com</p>
+        </div>
+    </div>
+    <div class="column">
+        <div class="container">
+            <img src="https://media.thenerdstash.com/wp-content/uploads/2023/04/Resident-Evil-4-How-to-Play-as-HunK.jpg" alt="Hưng" style="width: 300px; height: auto;" />
+            <h2>Hưng</h2>
+            <p class="title">Unknow</p>
+            <p>Báo Thủ Miền Nam.</p>
+            <p>camhung@gmail.com</p>
+        </div>
+    </div>
+</div>
