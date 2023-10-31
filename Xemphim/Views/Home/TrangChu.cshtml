@@ -1,38 +1,125 @@
-﻿@model List<Xemphim.Models.Phim>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Xemphim.Models.Phim>
 @{
     ViewBag.Title = "TrangChu";
 }
+<style>
+    .pagination-container {
+        text-align: center;
+    }
 
-<div class="row">
-    <div class="side">
-        <h2>Thể Loại</h2>
-        <form action="/action_page.php">
-            <label for="cars">Chọn Thể Loại Phim:</label>
-            <select name="cars" id="cars">
-                <option value="volvo">Kinh dị</option>
-                <option value="saab">Hoạt Hình</option>
-                <option value="opel">Tình Cảm</option>
-                <option value="audi">Anime</option>
-            </select>
-            <br><br>
-            <input type="submit" value="Tìm Kiếm">
-        </form>
-    </div>
-</div>
+        .pagination-container ul {
+            display: inline-block;
+            padding-left: 0;
+            margin: 0;
+            border-radius: 4px;
+        }
+
+            .pagination-container ul li {
+                display: inline;
+            }
+
+                .pagination-container ul li a,
+                .pagination-container ul li span {
+                    color: #337ab7;
+                    text-decoration: none;
+                    background-color: #fff;
+                    border: 1px solid #ddd;
+                    margin-left: -1px;
+                    padding: 6px 12px;
+                    line-height: 1.42857143;
+                }
+
+                .pagination-container ul li:first-child a,
+                .pagination-container ul li:first-child span {
+                    margin-left: 0;
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                }
+
+                .pagination-container ul li:last-child a,
+                .pagination-container ul li:last-child span {
+                    border-top-right-radius: 4px;
+                    border-bottom-right-radius: 4px;
+                }
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .card {
+        flex: 0 0 calc(50% - 20px);
+        margin-bottom: 20px;
+        box-sizing: border-box;
+    }
+
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+
+        .card h1, .card p {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .card .btn {
+            background-color: #337ab7;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: inline-block;
+        }
+</style>
+<form action="@Url.Action("TimKiemTheLoai", "Home")" method="post">
+    <label for="theLoai">Chọn Thể Loại Phim:</label>
+    <select name="theLoai" id="theLoai">
+        <option value="Kinh dị">Kinh dị</option>
+        <option value="Hoạt Hình">Hoạt Hình</option>
+        <option value="Tình Cảm">Tình Cảm</option>
+        <option value="Anime">Anime</option>
+    </select>
+    <br><br>
+    <input type="submit" value="Tìm Kiếm">
+</form>
 <div class="row">
     @*In Danh Sách Các Phim Có Trong Bảng "Phim"*@
-        @foreach (var phim in Model)
-        {
-            <div class="card">
-                <img src="~/Content/MovieIMG/@phim.HinhMinhHoa" alt="@phim.TenPhim" style="width:250px; height:250px">
-                <h1>@phim.TieuDe</h1>
-                <p>@phim.TenPhim</p>
-                <p>@phim.NamSanXuat</p>
-                <p>@phim.TheLoai</p>
-                <p>@phim.ThoiLuong</p>
-                <button>
-                    <a href="@Url.Action("XemPhim", "Home", new { id =  phim.IdPhim})">Xem Ngay</a>
-                </button>
-            </div>
-        }
+    @foreach (var phim in Model)
+    {
+        <div class="card">
+            <img src="~/Content/MovieIMG/@phim.HinhMinhHoa" alt="@phim.TenPhim" style="width:250px; height:250px">
+            <h1>@phim.TieuDe</h1>
+            <p>@phim.TenPhim</p>
+            <p>@phim.NamSanXuat</p>
+            <p>@phim.TheLoai</p>
+            <p>@phim.ThoiLuong</p>
+            <a href="@Url.Action("XemPhim", "Home", new { id =  phim.IdPhim})" class="btn btn-default">Xem Ngay</a>
+        </div>
+    }
 </div>
+
+@if (Model != null && Model.PageCount > 1)
+{
+    <div>
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    </div>
+    <div class="pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("TrangChu", new { page }),
+            new PagedListRenderOptions
+            {
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                LinkToFirstPageFormat = "<< First",
+                LinkToPreviousPageFormat = "< Previous",
+                LinkToNextPageFormat = "Next >",
+                LinkToLastPageFormat = "Last >>",
+                PageCountAndCurrentLocationFormat = "{0} of {1}",
+            })
+    </div>
+
+}

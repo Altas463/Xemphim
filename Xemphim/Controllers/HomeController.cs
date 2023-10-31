@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -33,15 +34,16 @@ namespace Xemphim.Controllers
 
             return View();
         }
-        public ActionResult TrangChu()
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult TrangChu(int? page)
         {
             using (var dbContext = new XemPhimEntities())
             {
-                var items = dbContext.Phims.ToList();
-
-                return View(items);
+                var items = dbContext.Phims.OrderBy(p => p.IdPhim);
+                int pageSize = 4;
+                int pageNumber = (page ?? 1);
+                return View(items.ToPagedList(pageNumber, pageSize));
             }
-
         }
         public ActionResult NewMovie()
         {
@@ -62,6 +64,14 @@ namespace Xemphim.Controllers
         {
             var Phim = databse.Phims.FirstOrDefault(s => s.IdPhim == Id);
             return View(Phim);
+        }
+        [HttpPost]
+        public ActionResult TimKiemTheLoai(string theLoai, int? page)
+        {
+            var phimTheoTheLoai = databse.Phims.Where(p => p.TheLoai == theLoai).OrderBy(p => p.IdPhim);
+            int pageSize = 4;
+            int pageNumber = (page ?? 1);
+            return View("TrangChu", phimTheoTheLoai.ToPagedList(pageNumber, pageSize));
         }
     }
 }
